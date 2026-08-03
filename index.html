@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Modern Masculine PH | Discipline. Mindset. Purpose. Legacy. Brotherhood.</title>
     <meta name="description"
         content="Modern Masculine PH is a premium growth-focused community for men building discipline, mindset, purpose, legacy, and brotherhood." />
@@ -60,8 +63,7 @@
                 </div>
 
                 <div class="hero-visual" aria-hidden="true">
-                    <div class="hero-card">
-                        <img src="Button_of_MMPH_1-removebg-preview.png" alt="Modern Masculine PH visual asset" />
+                    <div class="hero-card hero-card--plain">
                         <div class="hero-card-caption">
                             <p>Premium brotherhood for disciplined growth.</p>
                         </div>
@@ -153,6 +155,26 @@
                 </div>
             </section>
 
+            <section class="game" id="game">
+                <div class="section-heading">
+                    <p class="eyebrow">Growth Challenge</p>
+                    <h2>Test your Modern Masculine mindset with a quick quiz.</h2>
+                </div>
+                <div class="game-card">
+                    <div class="game-question" id="gameQuestion">
+                        <p>Loading question...</p>
+                    </div>
+                    <div class="game-options" id="gameOptions" role="list"></div>
+                    <div class="game-feedback" id="gameFeedback" aria-live="polite"></div>
+                    <div class="game-footer">
+                        <button class="btn secondary" id="gameNext" type="button">Next Question</button>
+                        <div class="game-score">
+                            <span>Score:</span> <strong id="gameScore">0</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="join" id="join">
                 <div class="join-card">
                     <div>
@@ -163,7 +185,8 @@
                             stronger future.
                         </p>
                     </div>
-                    <a class="btn primary" href="mailto:community@modernmasculineph.com">Reserve Your Spot</a>
+                    <a class="btn primary" href="https://lchesterkenneth.github.io/Modern-Masculine-PH/" target="_blank"
+                        rel="noopener noreferrer">Visit Website</a>
                 </div>
             </section>
         </main>
@@ -172,6 +195,105 @@
             <p>© 2026 Modern Masculine PH. Discipline. Mindset. Purpose. Legacy. Brotherhood.</p>
         </footer>
     </div>
+    <script>
+        const questions = [
+            {
+                question: 'Which value is most important when building consistency?',
+                options: ['Discipline', 'Luck', 'Perfection', 'Speed'],
+                answer: 0,
+                feedback: 'Discipline is the foundation of long-term progress, especially when motivation is low.'
+            },
+            {
+                question: 'What does “legacy” mean in a growth-focused community?',
+                options: ['Short-term fame', 'Sustained impact', 'Immediate reward', 'Secret advantage'],
+                answer: 1,
+                feedback: 'Legacy is about creating impact that lasts beyond your daily actions.'
+            },
+            {
+                question: 'Which choice most supports a strong mindset?',
+                options: ['Avoiding hard work', 'Blaming others', 'Learning from failure', 'Waiting for certainty'],
+                answer: 2,
+                feedback: 'A strong mindset learns from failure and keeps moving forward.'
+            },
+            {
+                question: 'What is the best first step to join a community?',
+                options: ['Show up and engage', 'Stay silent', 'Ignore feedback', 'Wait for perfect timing'],
+                answer: 0,
+                feedback: 'Showing up and engaging builds momentum faster than waiting for perfection.'
+            },
+            {
+                question: 'What does brotherhood contribute to personal growth?',
+                options: ['Isolation', 'Accountability and support', 'Everything without effort', 'Competition only'],
+                answer: 1,
+                feedback: 'Brotherhood contributes accountability, support, and shared growth energy.'
+            }
+        ];
+
+        const questionEl = document.getElementById('gameQuestion');
+        const optionsEl = document.getElementById('gameOptions');
+        const feedbackEl = document.getElementById('gameFeedback');
+        const scoreEl = document.getElementById('gameScore');
+        const nextButton = document.getElementById('gameNext');
+
+        let currentIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        function renderQuestion() {
+            const current = questions[currentIndex];
+            questionEl.innerHTML = `<p>${current.question}</p>`;
+            optionsEl.innerHTML = '';
+            feedbackEl.textContent = '';
+            feedbackEl.className = 'game-feedback';
+            answered = false;
+
+            current.options.forEach((option, optionIndex) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'game-option btn secondary';
+                button.textContent = option;
+                button.addEventListener('click', () => handleAnswer(optionIndex));
+                optionsEl.appendChild(button);
+            });
+
+            nextButton.disabled = true;
+        }
+
+        function handleAnswer(selectedIndex) {
+            if (answered) return;
+            answered = true;
+            const current = questions[currentIndex];
+            const allButtons = optionsEl.querySelectorAll('button');
+            allButtons.forEach((button, index) => {
+                button.disabled = true;
+                if (index === current.answer) {
+                    button.classList.add('correct');
+                }
+                if (index === selectedIndex && index !== current.answer) {
+                    button.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === current.answer) {
+                score += 1;
+                feedbackEl.textContent = current.feedback;
+                feedbackEl.classList.add('correct');
+            } else {
+                feedbackEl.textContent = `Not quite — ${current.feedback}`;
+                feedbackEl.classList.add('incorrect');
+            }
+
+            scoreEl.textContent = score;
+            nextButton.disabled = false;
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % questions.length;
+            renderQuestion();
+        });
+
+        renderQuestion();
+    </script>
 </body>
 
 </html>
