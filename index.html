@@ -290,6 +290,36 @@
                 options: ['Isolation', 'Accountability and support', 'Everything without effort', 'Competition only'],
                 answer: 1,
                 feedback: 'Brotherhood contributes accountability, support, and shared growth energy.'
+            },
+            {
+                question: 'What is the strongest response to a setback?',
+                options: ['Quit and avoid it', 'Reflect and improve', 'Blame others', 'Wait for luck'],
+                answer: 1,
+                feedback: 'A strong response to setbacks is reflection and improvement.'
+            },
+            {
+                question: 'Why is purpose important in daily life?',
+                options: ['It removes all difficulty', 'It gives direction and meaning', 'It eliminates responsibility', 'It replaces discipline'],
+                answer: 1,
+                feedback: 'Purpose gives your actions direction and meaning.'
+            },
+            {
+                question: 'Which habit best supports long-term growth?',
+                options: ['Consistency', 'Inconsistency', 'Avoiding challenge', 'Overthinking'],
+                answer: 0,
+                feedback: 'Consistency is one of the most powerful habits for long-term growth.'
+            },
+            {
+                question: 'How should a disciplined person handle pressure?',
+                options: ['Panic and freeze', 'Stay calm and act with intention', 'Ignore it completely', 'Depend on others'],
+                answer: 1,
+                feedback: 'Discipline helps you stay calm and act with intention under pressure.'
+            },
+            {
+                question: 'What is the best mindset for building a strong future?',
+                options: ['A life of excuses', 'A commitment to growth', 'A focus on comfort', 'A fear of change'],
+                answer: 1,
+                feedback: 'A commitment to growth is the best mindset for building a strong future.'
             }
         ];
 
@@ -351,8 +381,22 @@
             nextButton.disabled = false;
         }
 
+        function showCompletion() {
+            questionEl.innerHTML = '<p>Quiz complete!</p>';
+            optionsEl.innerHTML = '';
+            feedbackEl.innerHTML = '<p><strong>Welcome to Modern Masculine PH!</strong><br />Growth starts with one step. Keep learning, stay disciplined, and never stop improving. 🔥</p>';
+            feedbackEl.className = 'game-feedback correct';
+            nextButton.disabled = true;
+            scoreEl.textContent = score;
+        }
+
         nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % questions.length;
+            if (currentIndex === questions.length - 1) {
+                showCompletion();
+                return;
+            }
+
+            currentIndex += 1;
             renderQuestion();
         });
 
