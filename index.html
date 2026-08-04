@@ -384,9 +384,9 @@
         function showCompletion() {
             questionEl.innerHTML = '<p>Quiz complete!</p>';
             optionsEl.innerHTML = '';
-            feedbackEl.innerHTML = '<p><strong>Welcome to Modern Masculine PH!</strong><br />Growth starts with one step. Keep learning, stay disciplined, and never stop improving. 🔥</p>';
+            feedbackEl.innerHTML = '<p><strong>Good Job Man</strong><br /><strong>Welcome to Modern Masculine PH!</strong><br />Growth starts with one step. Keep learning, stay disciplined, and never stop improving. 🔥</p>';
             feedbackEl.className = 'game-feedback correct';
-            nextButton.disabled = true;
+            nextButton.style.display = 'none';
             scoreEl.textContent = score;
         }
 
