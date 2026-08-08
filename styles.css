@@ -94,19 +94,27 @@ img {
 
 .hero {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
     gap: 40px;
     align-items: center;
     padding: 72px 0 56px;
 }
 
+.hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
 .eyebrow {
     text-transform: uppercase;
     letter-spacing: 0.3em;
-    font-size: 0.78rem;
+    font-size: 20 rem;
     color: var(--gold);
     margin-bottom: 12px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .hero h1,
@@ -127,12 +135,13 @@ img {
     line-height: 1.8;
     color: var(--muted);
     max-width: 620px;
-    margin: 20px 0 0;
+    margin: 20px auto 0;
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 14px;
     margin-top: 28px;
 }
@@ -164,6 +173,7 @@ img {
 
 .hero-metrics {
     display: flex;
+    justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 32px;
@@ -175,6 +185,7 @@ img {
     border-radius: 18px;
     background: var(--panel);
     min-width: 120px;
+    text-align: center;
 }
 
 .hero-metrics strong {
